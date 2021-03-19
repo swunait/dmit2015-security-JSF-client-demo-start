@@ -1,7 +1,6 @@
 package dmit2015.view;
 
-import dmit2015.entity.TodoItem;
-import dmit2015.repository.TodoItemRepository;
+import dmit2015.data.TodoItem;
 import org.omnifaces.util.Messages;
 import lombok.Getter;
 
@@ -16,8 +15,8 @@ import java.util.List;
 @ViewScoped
 public class TodoItemListController implements Serializable {
 
-    @Inject
-    private TodoItemRepository _todoitemRepository;
+//    @Inject
+//    private TodoItemRepository _todoitemRepository;
 
     @Getter
     private List<TodoItem> todoitemList;
@@ -25,7 +24,7 @@ public class TodoItemListController implements Serializable {
     @PostConstruct  // After @Inject is complete
     public void init() {
         try {
-            todoitemList = _todoitemRepository.findAll();
+//            todoitemList = _todoitemRepository.findAll();
         } catch (RuntimeException ex) {
             Messages.addGlobalError(ex.getMessage());
         }

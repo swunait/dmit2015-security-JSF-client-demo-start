@@ -1,7 +1,6 @@
 package dmit2015.view;
 
-import dmit2015.entity.TodoItem;
-import dmit2015.repository.TodoItemRepository;
+import dmit2015.data.TodoItem;
 import lombok.Getter;
 import org.omnifaces.util.Messages;
 
@@ -13,8 +12,8 @@ import javax.inject.Named;
 @RequestScoped
 public class TodoItemCreateController {
 
-    @Inject
-    private TodoItemRepository _todoitemRepository;
+//    @Inject
+//    private TodoItemRepository _todoitemRepository;
 
     @Getter
     private TodoItem newTodoItem = new TodoItem();
@@ -22,7 +21,7 @@ public class TodoItemCreateController {
     public String onCreate() {
         String nextPage = "";
         try {
-            _todoitemRepository.add(newTodoItem);
+//            _todoitemRepository.add(newTodoItem);
             Messages.addFlashGlobalInfo("Create was successful.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {

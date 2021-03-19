@@ -1,7 +1,6 @@
 package dmit2015.view;
 
-import dmit2015.entity.Movie;
-import dmit2015.repository.MovieRepository;
+import dmit2015.data.Movie;
 import lombok.Getter;
 import org.omnifaces.util.Messages;
 
@@ -20,8 +19,8 @@ public class MovieListController implements Serializable {
 
     private Logger logger = Logger.getLogger(MovieListController.class.getSimpleName());
 
-    @Inject
-    private MovieRepository _movieRepository;
+//    @Inject
+//    private MovieRepository _movieRepository;
 
     @Getter
     private List<Movie> movies;
@@ -29,7 +28,7 @@ public class MovieListController implements Serializable {
     @PostConstruct
     void init() {
         try {
-            movies = _movieRepository.findAll();
+//            movies = _movieRepository.findAll();
         } catch (Exception ex) {
             Messages.addGlobalFatal("Error fetching movies from system.");
             logger.info(ex.getMessage());

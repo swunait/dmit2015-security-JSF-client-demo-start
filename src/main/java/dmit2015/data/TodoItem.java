@@ -1,4 +1,4 @@
-package dmit2015.entity;
+package dmit2015.data;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,6 @@
 package dmit2015.view;
 
-import dmit2015.entity.Movie;
-import dmit2015.repository.MovieRepository;
+import dmit2015.data.Movie;
 import lombok.Getter;
 import org.omnifaces.util.Messages;
 
@@ -13,8 +12,8 @@ import javax.inject.Named;
 @RequestScoped
 public class MovieCreateController {
 
-    @Inject
-    private MovieRepository _movieRepository;
+//    @Inject
+//    private MovieRepository _movieRepository;
 
     @Getter
     private Movie newMovie = new Movie();
@@ -22,7 +21,7 @@ public class MovieCreateController {
     public String onCreateNew() {
         String nextPage = "";
         try {
-            _movieRepository.add(newMovie);
+//            _movieRepository.add(newMovie);
             Messages.addFlashGlobalInfo("Create was successful.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {

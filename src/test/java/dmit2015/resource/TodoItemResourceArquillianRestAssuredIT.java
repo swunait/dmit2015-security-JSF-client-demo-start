@@ -2,7 +2,7 @@ package dmit2015.resource;
 
 import dmit2015.config.ApplicationConfig;
 import dmit2015.config.JAXRSConfiguration;
-import dmit2015.entity.TodoItem;
+import dmit2015.data.TodoItem;
 import dmit2015.repository.TodoItemRepository;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

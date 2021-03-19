@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>dmit2015</groupId>
-  <artifactId>dmit2015-security-backendapp-demo-start</artifactId>
+  <artifactId>dmit2015-security-JSF-client-demo-start</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -220,7 +220,7 @@
   </dependencies>
 
   <build>
-    <finalName>dmit2015-security-backendapp-demo-start</finalName>
+    <finalName>dmit2015-security-JSF-client-demo-start</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

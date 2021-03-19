@@ -1,7 +1,7 @@
 package dmit2015.respository;
 
 import dmit2015.config.ApplicationConfig;
-import dmit2015.entity.Movie;
+import dmit2015.data.Movie;
 import dmit2015.repository.MovieRepository;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;

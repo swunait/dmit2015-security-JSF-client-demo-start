@@ -1,7 +1,6 @@
 package dmit2015.view;
 
-import dmit2015.entity.Movie;
-import dmit2015.repository.MovieRepository;
+import dmit2015.data.Movie;
 import lombok.Getter;
 import lombok.Setter;
 import org.omnifaces.util.Faces;
@@ -19,8 +18,8 @@ import java.util.Optional;
 @ViewScoped
 public class MovieEditController implements Serializable {
 
-    @Inject
-    private MovieRepository _movieRepository;
+//    @Inject
+//    private MovieRepository _movieRepository;
 
     @Inject
     @ManagedProperty("#{param.editId}")
@@ -34,15 +33,15 @@ public class MovieEditController implements Serializable {
     @PostConstruct
     public void init() {
         if (!Faces.isPostback()) {
-            Optional<Movie> optionalEntity = _movieRepository.findById(editId);
-            optionalEntity.ifPresent(entity -> existingMovie = entity);
+//            Optional<Movie> optionalEntity = _movieRepository.findById(editId);
+//            optionalEntity.ifPresent(entity -> existingMovie = entity);
         }
     }
 
     public String onUpdate() {
         String nextPage = "";
         try {
-            _movieRepository.update(existingMovie);
+//            _movieRepository.update(existingMovie);
             Messages.addFlashGlobalInfo("Update was successful.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {
@@ -55,7 +54,7 @@ public class MovieEditController implements Serializable {
     public String onDelete() {
         String nextPage = "";
         try {
-            _movieRepository.remove(existingMovie.getId());
+//            _movieRepository.remove(existingMovie.getId());
             Messages.addFlashGlobalInfo("Delete was successful.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {

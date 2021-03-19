@@ -1,7 +1,6 @@
 package dmit2015.view;
 
-import dmit2015.entity.TodoItem;
-import dmit2015.repository.TodoItemRepository;
+import dmit2015.data.TodoItem;
 import lombok.Getter;
 import lombok.Setter;
 import org.omnifaces.util.Faces;
@@ -19,8 +18,8 @@ import java.util.Optional;
 @ViewScoped
 public class TodoItemEditController implements Serializable {
 
-    @Inject
-    private TodoItemRepository _todoitemRepository;
+//    @Inject
+//    private TodoItemRepository _todoitemRepository;
 
     @Inject
     @ManagedProperty("#{param.editId}")
@@ -34,15 +33,15 @@ public class TodoItemEditController implements Serializable {
     @PostConstruct
     public void init() {
         if (!Faces.isPostback()) {
-            Optional<TodoItem> optionalEntity = _todoitemRepository.findById(editId);
-            optionalEntity.ifPresent(entity -> existingTodoItem = entity);
+//            Optional<TodoItem> optionalEntity = _todoitemRepository.findById(editId);
+//            optionalEntity.ifPresent(entity -> existingTodoItem = entity);
         }
     }
 
     public String onUpdate() {
         String nextPage = "";
         try {
-            _todoitemRepository.update(existingTodoItem);
+//            _todoitemRepository.update(existingTodoItem);
             Messages.addFlashGlobalInfo("Update was successful.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {
@@ -55,7 +54,7 @@ public class TodoItemEditController implements Serializable {
     public String onDelete() {
         String nextPage = "";
         try {
-            _todoitemRepository.remove(existingTodoItem.getId());
+//            _todoitemRepository.remove(existingTodoItem.getId());
             Messages.addFlashGlobalInfo("Delete was successful.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {
