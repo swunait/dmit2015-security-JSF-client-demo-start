@@ -1,8 +1,10 @@
 package dmit2015.view;
 
+import dmit2015.client.TodoItemService;
 import dmit2015.data.TodoItem;
 import lombok.Getter;
 import lombok.Setter;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
@@ -12,14 +14,14 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Optional;
 
 @Named("currentTodoItemEditController")
 @ViewScoped
 public class TodoItemEditController implements Serializable {
 
-//    @Inject
-//    private TodoItemRepository _todoitemRepository;
+    @Inject
+    @RestClient
+    private TodoItemService _todoItemService;
 
     @Inject
     @ManagedProperty("#{param.editId}")
@@ -33,20 +35,19 @@ public class TodoItemEditController implements Serializable {
     @PostConstruct
     public void init() {
         if (!Faces.isPostback()) {
-//            Optional<TodoItem> optionalEntity = _todoitemRepository.findById(editId);
-//            optionalEntity.ifPresent(entity -> existingTodoItem = entity);
+            existingTodoItem = _todoItemService.findOneById(editId);
         }
     }
 
     public String onUpdate() {
         String nextPage = "";
         try {
-//            _todoitemRepository.update(existingTodoItem);
+            _todoItemService.update(editId, existingTodoItem);
             Messages.addFlashGlobalInfo("Update was successful.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {
             e.printStackTrace();
-            Messages.addGlobalError("Update was not successful.");
+            Messages.addGlobalError("Update was not successful. {0}", e.getMessage());
         }
         return nextPage;
     }
@@ -54,12 +55,12 @@ public class TodoItemEditController implements Serializable {
     public String onDelete() {
         String nextPage = "";
         try {
-//            _todoitemRepository.remove(existingTodoItem.getId());
+            _todoItemService.delete(existingTodoItem.getId());
             Messages.addFlashGlobalInfo("Delete was successful.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {
             e.printStackTrace();
-            Messages.addGlobalError("Delete not successful.");
+            Messages.addGlobalError("Delete not successful. {0}", e.getMessage());
         }
         return nextPage;
     }

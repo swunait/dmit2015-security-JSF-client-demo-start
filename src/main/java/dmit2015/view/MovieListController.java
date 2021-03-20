@@ -1,7 +1,9 @@
 package dmit2015.view;
 
+import dmit2015.client.MovieService;
 import dmit2015.data.Movie;
 import lombok.Getter;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.omnifaces.util.Messages;
 
 import javax.annotation.PostConstruct;
@@ -19,8 +21,9 @@ public class MovieListController implements Serializable {
 
     private Logger logger = Logger.getLogger(MovieListController.class.getSimpleName());
 
-//    @Inject
-//    private MovieRepository _movieRepository;
+    @Inject
+    @RestClient
+    private MovieService _movieService;
 
     @Getter
     private List<Movie> movies;
@@ -28,9 +31,9 @@ public class MovieListController implements Serializable {
     @PostConstruct
     void init() {
         try {
-//            movies = _movieRepository.findAll();
+            movies = _movieService.findAll();
         } catch (Exception ex) {
-            Messages.addGlobalFatal("Error fetching movies from system.");
+            Messages.addGlobalFatal("Error fetching movies from system. {0}", ex.getMessage());
             logger.info(ex.getMessage());
         }
     }

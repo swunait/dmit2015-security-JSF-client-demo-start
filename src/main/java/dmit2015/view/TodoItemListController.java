@@ -1,6 +1,8 @@
 package dmit2015.view;
 
+import dmit2015.client.TodoItemService;
 import dmit2015.data.TodoItem;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.omnifaces.util.Messages;
 import lombok.Getter;
 
@@ -15,8 +17,9 @@ import java.util.List;
 @ViewScoped
 public class TodoItemListController implements Serializable {
 
-//    @Inject
-//    private TodoItemRepository _todoitemRepository;
+    @Inject
+    @RestClient
+    private TodoItemService _todoItemService;
 
     @Getter
     private List<TodoItem> todoitemList;
@@ -24,7 +27,7 @@ public class TodoItemListController implements Serializable {
     @PostConstruct  // After @Inject is complete
     public void init() {
         try {
-//            todoitemList = _todoitemRepository.findAll();
+            todoitemList = _todoItemService.findAll();
         } catch (RuntimeException ex) {
             Messages.addGlobalError(ex.getMessage());
         }

@@ -1,8 +1,10 @@
 package dmit2015.view;
 
+import dmit2015.client.MovieService;
 import dmit2015.data.Movie;
 import lombok.Getter;
 import lombok.Setter;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
@@ -12,14 +14,14 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Optional;
 
 @Named("currentMovieEditController")
 @ViewScoped
 public class MovieEditController implements Serializable {
 
-//    @Inject
-//    private MovieRepository _movieRepository;
+    @Inject
+    @RestClient
+    private MovieService _movieService;
 
     @Inject
     @ManagedProperty("#{param.editId}")
@@ -33,20 +35,19 @@ public class MovieEditController implements Serializable {
     @PostConstruct
     public void init() {
         if (!Faces.isPostback()) {
-//            Optional<Movie> optionalEntity = _movieRepository.findById(editId);
-//            optionalEntity.ifPresent(entity -> existingMovie = entity);
+            existingMovie = _movieService.findOneById(editId);
         }
     }
 
     public String onUpdate() {
         String nextPage = "";
         try {
-//            _movieRepository.update(existingMovie);
+            _movieService.update(editId, existingMovie);
             Messages.addFlashGlobalInfo("Update was successful.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {
             e.printStackTrace();
-            Messages.addGlobalError("Update was not successful.");
+            Messages.addGlobalError("Update was not successful. {0}", e.getMessage());
         }
         return nextPage;
     }
@@ -54,12 +55,12 @@ public class MovieEditController implements Serializable {
     public String onDelete() {
         String nextPage = "";
         try {
-//            _movieRepository.remove(existingMovie.getId());
+            _movieService.delete(existingMovie.getId());
             Messages.addFlashGlobalInfo("Delete was successful.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {
             e.printStackTrace();
-            Messages.addGlobalError("Delete not successful.");
+            Messages.addGlobalError("Delete not successful. {0}", e.getMessage());
         }
         return nextPage;
     }
